@@ -134,6 +134,14 @@ function saveInfoDetails(event) {
         $("#image_upload").focus();
         return;
     }
+    if (!checkPhoneNumberLength()) {
+        $("#phoneNo").focus();
+        return;
+    }
+    if (!verifyEmail()) {
+        $("#mail").focus();
+        return;
+    }
     let data = '<table id = "data_info" border= "1" class = "table col-sm-12 table-striped table-bordered" style="text-align: center;width: 100%;color: #5b5858;"><tr><th colspan = "2">Profile Info</th></tr>';
     data += "<tr><td><b>Name</b></td><td>"+profile["fullName"]+"</td></tr><tr><td><b>Phone No.</b></td><td>"+profile["phoneNo"]+"</td></tr><tr><td><b>Email</b></td><td>"+profile["mail"]+"</td></tr><tr><td><b>Address</b></td><td>"+profile["address"]+"</td></tr><tr><td><b>Site</b></td><td>"+profile["site"]+"</td></tr><tr><td><b>No. of people</b></td><td>"+profile["people"]+"</td></tr>";
     data += '</table>';
@@ -144,24 +152,26 @@ function saveInfoDetails(event) {
 }
 
 function checkPhoneNumberLength() {
-    let telformate = /\d{10}/is;
-    if ( !$("#phoneNo").val().match(telformate)) {
+    let telformate = /\d{10}$/is;
+    let tel = $("#phoneNo").val();
+    if ( !tel.match(telformate)) {
         $("#phoneNo_empty").html("Please enter the valid Phone Number");
-        $("#phoneNo").focus();
-        return ;
+        return 0;
     } else {
         $("#phoneNo_empty").html("");
+        return 1;
     }
 }
 
 function verifyEmail() {
     let emailformat = /^(\w+)@(\w+).([a-zA-z]{2,3})$/is;
+    let email = $("#mail").val();
     if (!$("#mail").val().match(emailformat)) {
         $("#mail_empty").html("Please enter the valid Email");
-        $("#mail").focus();
-        return;
+        return 0;
     } else {
         $("#mail_empty").html();
+        return 1;
     }
 }
 
