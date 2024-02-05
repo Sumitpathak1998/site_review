@@ -137,7 +137,6 @@
     function saveInfoDetails(event) {
         event.preventDefault();
         let info_form = new FormData(document.getElementById("info_ssr"));
-        console.log(info_form);
         let profile = [];
         for(let [key,value] of info_form) {
             if( key != 'image') {
